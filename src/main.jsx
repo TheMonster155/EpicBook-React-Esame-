@@ -6,13 +6,16 @@ import './index.css'
 // Importiamo il BookContextProvider
 import { BookContextProvider } from './components/context/BookContext'
 import { DarkModeContextProvider } from './components/context/DarkModeContext.jsx'
+import { SelectContextProvider } from './components/context/SelectContext.jsx'
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <DarkModeContextProvider>
-            <BookContextProvider>
-                <App />
-            </BookContextProvider>
-        </DarkModeContextProvider>
+        <SelectContextProvider>
+            <DarkModeContextProvider>
+                <BookContextProvider>
+                    <App />
+                </BookContextProvider>
+            </DarkModeContextProvider>
+        </SelectContextProvider>
     </StrictMode>
 )

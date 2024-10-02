@@ -4,11 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { DarkModeContext } from '../context/DarkModeContext'
 
-const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
-    const closeModal = () => {
-        setIsCommentsVisible(false)
-    }
-
+const AllComments = ({ asin }) => {
     const { isDark } = useContext(DarkModeContext)
 
     const ENDPOINTGET = `https://striveschool-api.herokuapp.com/api/books/${asin}/comments/`
@@ -31,6 +27,7 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
     }
 
     const getRatings = async () => {
+        console.log('Fetching comments for asin:', asin)
         if (!asin) return
         try {
             const response = await fetch(ENDPOINTGET, {
@@ -90,10 +87,7 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
                         Authorization: `Bearer ${APIKEY}`,
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        ...modalFormState, // Includi elementId e altri campi
-                        elementId: asin, // Assicurati di includere elementId
-                    }),
+                    body: JSON.stringify(modalFormState),
                 })
 
                 if (response.ok) {
@@ -174,96 +168,73 @@ const AllComments = ({ isCommentsVisible, setIsCommentsVisible, asin }) => {
     }, [asin])
 
     return (
-        <Modal
-            className={isDark ? 'bg-dark text-white' : 'bg-light text-dark'}
-            show={isCommentsVisible}
-            onHide={closeModal}
-        >
-            <Modal.Header closeButton>
-                <Modal.Title>Comments</Modal.Title>
-            </Modal.Header>
-            <Modal.Body
-                className={isDark ? 'bg-dark text-white' : 'bg-light text-dark'}
-            >
-                <ListGroup variant="flush">
-                    {comments.length > 0 ? (
-                        comments.map((comment) => (
-                            <ListGroup.Item key={comment._id}>
-                                <div className="d-flex flex-column gap-1">
-                                    <div>
-                                        <strong>Author:</strong>{' '}
-                                        {comment.author}
-                                    </div>
-                                    <div>
-                                        <strong>Comment:</strong>{' '}
-                                        {comment.comment}
-                                    </div>
-                                    <div>
-                                        <strong>Rating:</strong> {comment.rate}
-                                    </div>
+        <div className={isDark ? 'bg-dark' : 'bg-light'}>
+            <ListGroup variant="flush">
+                {comments.length > 0 ? (
+                    comments.map((comment) => (
+                        <ListGroup.Item key={comment._id}>
+                            <div className="d-flex flex-column gap-1">
+                                <div>
+                                    <strong>Author:</strong> {comment.author}
                                 </div>
-                                <div className="d-flex gap-2">
-                                    <Button
-                                        variant="warning"
-                                        onClick={() => handleEditClick(comment)}
-                                    >
-                                        Edit
-                                    </Button>
-
-                                    <Button
-                                        variant="danger"
-                                        onClick={() =>
-                                            deleteComment(comment._id)
-                                        }
-                                    >
-                                        Delete
-                                    </Button>
+                                <div>
+                                    <strong>Comment:</strong> {comment.comment}
                                 </div>
-                            </ListGroup.Item>
-                        ))
-                    ) : (
-                        <ListGroup.Item>
-                            Non ci sono commenti per questo libro
+                                <div>
+                                    <strong>Rating:</strong> {comment.rate}
+                                </div>
+                            </div>
+                            <div className="d-flex gap-2">
+                                <Button
+                                    variant="warning"
+                                    onClick={() => handleEditClick(comment)}
+                                >
+                                    Edit
+                                </Button>
+                                <Button
+                                    variant="danger"
+                                    onClick={() => deleteComment(comment._id)}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
                         </ListGroup.Item>
-                    )}
-                </ListGroup>
-                <Form onSubmit={addOrUpdateComment}>
-                    <Form.Control
-                        type="number"
-                        min={1}
-                        max={5}
-                        required={true}
-                        name="rate"
-                        value={modalFormState.rate}
-                        onChange={handleInputChange}
-                        placeholder="Rate"
-                    />
-                    <Form.Control
-                        type="text"
-                        required={true}
-                        name="comment"
-                        value={modalFormState.comment}
-                        onChange={handleInputChange}
-                        placeholder="Comment"
-                    />
-                    <Button
-                        type="submit"
-                        variant="success"
-                        className="mt-2"
-                        disabled={isSubmitting}
-                    >
-                        {modalFormState.id
-                            ? 'Aggiorna Commento'
-                            : 'Invia Commento'}
-                    </Button>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={closeModal} variant="danger">
-                    Chiudi
+                    ))
+                ) : (
+                    <ListGroup.Item>
+                        Non ci sono commenti per questo libro
+                    </ListGroup.Item>
+                )}
+            </ListGroup>
+            <Form onSubmit={addOrUpdateComment}>
+                <Form.Control
+                    type="number"
+                    min={1}
+                    max={5}
+                    required={true}
+                    name="rate"
+                    value={modalFormState.rate}
+                    onChange={handleInputChange}
+                    placeholder="Rate"
+                />
+                <Form.Control
+                    type="text"
+                    required={true}
+                    name="comment"
+                    value={modalFormState.comment}
+                    onChange={handleInputChange}
+                    placeholder="Comment"
+                />
+                <Button
+                    type="submit"
+                    variant="success"
+                    className="mt-2"
+                    disabled={isSubmitting}
+                >
+                    {modalFormState.id ? 'Aggiorna Commento' : 'Invia Commento'}
                 </Button>
-            </Modal.Footer>
-        </Modal>
+            </Form>
+        </div>
     )
 }
 
