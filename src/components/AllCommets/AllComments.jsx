@@ -13,7 +13,7 @@ const AllComments = ({ asin }) => {
         rate: '',
         comment: '',
         id: null,
-        elementId: asin, // Assicurati di impostare elementId con asin
+        elementId: asin,
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -27,7 +27,6 @@ const AllComments = ({ asin }) => {
     }
 
     const getRatings = async () => {
-        console.log('Fetching comments for asin:', asin)
         if (!asin) return
         try {
             const response = await fetch(ENDPOINTGET, {

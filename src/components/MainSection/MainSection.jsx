@@ -1,6 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import BookCard from '../BookCard/BookCard'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { BookContext } from '../context/BookContext'
 import { DarkModeContext } from '../context/DarkModeContext'
 import { SelectContext } from '../context/SelectContext'
@@ -9,7 +9,10 @@ import AllComments from '../AllCommets/AllComments'
 const MainSection = () => {
     const { books } = useContext(BookContext)
     const { isDark } = useContext(DarkModeContext)
-    const { selectAsin } = useContext(SelectContext)
+    const { selectAsin, setSelectAsin } = useContext(SelectContext)
+    useEffect(() => {
+        setSelectAsin(null)
+    }, [])
 
     return (
         <main className={isDark ? 'bg-dark text-white' : 'bg-light text-dark'}>

@@ -8,7 +8,9 @@ export const SelectContextProvider = ({ children }) => {
         setSelectAsin((prev) => (prev === asin ? null : asin))
     }
     return (
-        <SelectContext.Provider value={{ selectAsin, toggleAsin }}>
+        <SelectContext.Provider
+            value={{ selectAsin, toggleAsin, setSelectAsin }}
+        >
             {children}
         </SelectContext.Provider>
     )

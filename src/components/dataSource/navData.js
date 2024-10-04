@@ -1,5 +1,5 @@
 export const navLinks = [
-    { href: '#', text: 'Home' },
-    { href: '#', text: 'About' },
-    { href: '#', text: 'Browse' },
+    { to: '/', text: 'Home' },
+    { to: '/about', text: 'About' },
+    { to: '/bookDay', text: 'Book of the Day' },
 ]

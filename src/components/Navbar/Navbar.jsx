@@ -6,6 +6,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useContext } from 'react'
 import { BookContext } from '../context/BookContext'
 import { DarkModeContext } from '../context/DarkModeContext'
+import { Link } from 'react-router-dom' // Usa il Link corretto
 
 const NavbarCustom = () => {
     const { inputValue, handleInputChange, handleSubmitForm } =
@@ -23,12 +24,19 @@ const NavbarCustom = () => {
                 <Button variant="secondary" onClick={handleDarkMode}>
                     {isDark ? 'dark-mode' : 'light-mode'}
                 </Button>
-                <Navbar.Brand href="#">Navbar</Navbar.Brand>
+                <Navbar.Brand href="#">
+                    <Link
+                        to="/"
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                        The Book
+                    </Link>
+                </Navbar.Brand>
                 <Nav className="me-auto">
                     {navLinks.map((link) => (
-                        <Nav.Link href={link.href} key={link.href}>
+                        <Link to={link.to} key={link.to} className="nav-link">
                             {link.text}
-                        </Nav.Link>
+                        </Link>
                     ))}
                 </Nav>
 
