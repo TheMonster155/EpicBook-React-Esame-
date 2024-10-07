@@ -167,11 +167,16 @@ const AllComments = ({ asin }) => {
     }, [asin])
 
     return (
-        <div className={isDark ? 'bg-dark' : 'bg-light'}>
+        <div
+            className={`p-4 ${isDark ? 'bg-dark text-light' : 'bg-light text-dark'}`}
+        >
             <ListGroup variant="flush">
                 {comments.length > 0 ? (
                     comments.map((comment) => (
-                        <ListGroup.Item key={comment._id}>
+                        <ListGroup.Item
+                            key={comment._id}
+                            className="border-0 rounded-3 shadow-sm mb-2"
+                        >
                             <div className="d-flex flex-column gap-1">
                                 <div>
                                     <strong>Author:</strong> {comment.author}
@@ -183,16 +188,18 @@ const AllComments = ({ asin }) => {
                                     <strong>Rating:</strong> {comment.rate}
                                 </div>
                             </div>
-                            <div className="d-flex gap-2">
+                            <div className="d-flex gap-2 mt-2">
                                 <Button
                                     variant="warning"
                                     onClick={() => handleEditClick(comment)}
+                                    className="flex-grow-1"
                                 >
                                     Edit
                                 </Button>
                                 <Button
                                     variant="danger"
                                     onClick={() => deleteComment(comment._id)}
+                                    className="flex-grow-1"
                                 >
                                     Delete
                                 </Button>
@@ -205,7 +212,7 @@ const AllComments = ({ asin }) => {
                     </ListGroup.Item>
                 )}
             </ListGroup>
-            <Form onSubmit={addOrUpdateComment}>
+            <Form onSubmit={addOrUpdateComment} className="mt-4">
                 <Form.Control
                     type="number"
                     min={1}
@@ -215,6 +222,7 @@ const AllComments = ({ asin }) => {
                     value={modalFormState.rate}
                     onChange={handleInputChange}
                     placeholder="Rate"
+                    className="mb-2"
                 />
                 <Form.Control
                     type="text"
@@ -223,11 +231,12 @@ const AllComments = ({ asin }) => {
                     value={modalFormState.comment}
                     onChange={handleInputChange}
                     placeholder="Comment"
+                    className="mb-2"
                 />
                 <Button
                     type="submit"
                     variant="success"
-                    className="mt-2"
+                    className="w-100"
                     disabled={isSubmitting}
                 >
                     {modalFormState.id ? 'Aggiorna Commento' : 'Invia Commento'}

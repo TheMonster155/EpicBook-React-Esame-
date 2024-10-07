@@ -1,4 +1,40 @@
+/* BookCard.css */
+
 .custom {
     box-shadow: 0 15px 80px rgba(34, 35, 58, 0.5);
     z-index: 2;
+}
+
+/* Nuova classe per il bordo rosso */
+.selected-border {
+    border: 5px solid red  !important; /* Imposta il bordo rosso */
+}
+
+.card-image {
+    height: 250px; /* Imposta un'altezza fissa per l'immagine */
+    object-fit: cover; /* Mantiene il rapporto di aspetto */
+    border-top-left-radius: 0.25rem; /* Angoli arrotondati */
+    border-top-right-radius: 0.25rem; /* Angoli arrotondati */
+}
+
+.custom-body {
+    padding: 1.5rem; /* Maggiore padding per il contenuto */
+    transition: background-color 0.3s; /* Transizione morbida */
+}
+
+.transition:hover {
+    transform: translateY(-5px); /* Leggero sollevamento al passaggio del mouse */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Ombra aggiuntiva al passaggio del mouse */
+}
+
+.btn-modern {
+    background-color: #007bff; /* Colore moderno */
+    color: white;
+    border: none;
+    transition: background-color 0.3s, transform 0.3s; /* Effetto hover */
+}
+
+.btn-modern:hover {
+    background-color: #0056b3; /* Colore più scuro al passaggio del mouse */
+    transform: scale(1.05); /* Leggero ingrandimento */
 }

@@ -10,7 +10,7 @@ import { DarkModeContext } from '../context/DarkModeContext'
 const BookCard = ({ price, category, title, img, asin }) => {
     const { selectAsin, toggleAsin } = useContext(SelectContext)
     const { isDark } = useContext(DarkModeContext)
-    const isSelected = selectAsin === asin
+    const isSelected = selectAsin === asin // Controlla se il libro è selezionato
     const navigate = useNavigate()
 
     const redirectDetails = () => {
@@ -18,39 +18,31 @@ const BookCard = ({ price, category, title, img, asin }) => {
     }
 
     const toggleIsSelect = () => {
-        toggleAsin(asin) // Chiama la funzione di contesto per cambiare l'asin selezionato
+        toggleAsin(asin) // Cambia l'asin selezionato
         Swal.fire({
             title: `${title}`,
-            text: `Hai selezionato "${title}"`, // Corretta la sintassi con le virgolette
+            text: `Hai selezionato "${title}"`,
             icon: 'info',
             confirmButtonText: 'Ok',
         })
     }
 
-    const selectedCardStyle = isSelected ? 'border-5 border-danger' : ''
-
     return (
-        <Col sm={12} md={6} lg={3}>
+        <Col sm={12} md={6} lg={4} className="mb-4">
             <Card
-                className={`h-100 custom ${isDark ? 'border-3 white' : ''} ${selectedCardStyle}`} // Applica la classe selezionata
-                onClick={() => toggleIsSelect(asin)}
+                className={`h-100 custom ${isDark ? 'border-3 white' : ''} shadow border-0 rounded-3 transition ${isSelected ? 'selected-border' : ''}`}
+                onClick={toggleIsSelect} // Click sulla Card per selezionare
             >
-                <Card.Img
-                    variant="top"
-                    className="h-100 w-100 object-fit-cover"
-                    src={img}
-                />
+                <Card.Img variant="top" className="card-image" src={img} />
                 <Card.Body
-                    className={` custom-body ${
-                        isDark ? 'bg-dark text-light' : 'bg-light text-dark'
-                    }`}
+                    className={`custom-body ${isDark ? 'bg-dark text-light' : 'bg-light text-dark'}`}
                 >
-                    <Card.Title>{category}</Card.Title>
+                    <Card.Title className="fw-bold fs-5">{category}</Card.Title>
                     <Card.Text className="text-truncate">{title}</Card.Text>
-                    <Card.Text>{price}£</Card.Text>
+                    <Card.Text className="fs-5 fw-bold">{price}$</Card.Text>
                     <Button
                         onClick={redirectDetails}
-                        className="custom-button btn"
+                        className="w-100 btn-modern d-flex align-items-center justify-content-center"
                     >
                         Details
                     </Button>

@@ -6,25 +6,22 @@ import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useContext } from 'react'
 import { BookContext } from '../context/BookContext'
 import { DarkModeContext } from '../context/DarkModeContext'
-import { Link } from 'react-router-dom' // Usa il Link corretto
+import { Link } from 'react-router-dom'
 
 const NavbarCustom = () => {
     const { inputValue, handleInputChange, handleSubmitForm } =
         useContext(BookContext)
-
-    const { isDark, handleDarkMode } = useContext(DarkModeContext)
-
+    const { isDark } = useContext(DarkModeContext)
     return (
         <Navbar
             bg={isDark ? 'dark' : 'light'}
-            data-bs-theme={isDark ? 'dark' : 'light'}
-            className="d-flex justify-content-between"
+            variant={isDark ? 'dark' : 'light'}
+            className="fixed-top d-flex justify-content-between"
+            expand="lg"
         >
             <Container>
-                <Button variant="secondary" onClick={handleDarkMode}>
-                    {isDark ? 'dark-mode' : 'light-mode'}
-                </Button>
-                <Navbar.Brand href="#">
+                {/* Brand e Dark Mode Toggle */}
+                <Navbar.Brand>
                     <Link
                         to="/"
                         style={{ textDecoration: 'none', color: 'inherit' }}
@@ -32,32 +29,42 @@ const NavbarCustom = () => {
                         The Book
                     </Link>
                 </Navbar.Brand>
-                <Nav className="me-auto">
-                    {navLinks.map((link) => (
-                        <Link to={link.to} key={link.to} className="nav-link">
-                            {link.text}
-                        </Link>
-                    ))}
-                </Nav>
 
-                <Form className="d-inline-flex" onSubmit={handleSubmitForm}>
-                    <Row>
-                        <Col xs="auto">
-                            <Form.Control
-                                type="text"
-                                placeholder="Search Book"
-                                value={inputValue}
-                                onChange={handleInputChange}
-                                className="mr-sm-2"
-                            />
-                        </Col>
-                        <Col xs="auto">
-                            <Button variant="success" type="submit">
-                                Submit
-                            </Button>
-                        </Col>
-                    </Row>
-                </Form>
+                {/* Navbar Links */}
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        {navLinks.map((link) => (
+                            <Link
+                                to={link.to}
+                                key={link.to}
+                                className="nav-link"
+                            >
+                                {link.text}
+                            </Link>
+                        ))}
+                    </Nav>
+
+                    {/* Form di ricerca */}
+                    <Form className="d-inline-flex" onSubmit={handleSubmitForm}>
+                        <Row>
+                            <Col>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search Book"
+                                    value={inputValue}
+                                    onChange={handleInputChange}
+                                    className="me-2"
+                                />
+                            </Col>
+                            <Col xs="auto">
+                                <Button variant="success" type="submit">
+                                    Search
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     )

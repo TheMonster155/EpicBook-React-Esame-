@@ -44,26 +44,33 @@ const BookDetails = () => {
             <NavbarCustom />
             <Container
                 fluid
-                className={isDark ? 'bg-dark text-white' : 'bg-light text-dark'}
+                className={`py-5 ${isDark ? 'bg-dark text-white' : 'bg-light text-dark'}`}
             >
-                <Row>
+                <Row className="g-4">
                     {bookSelect ? (
                         <>
-                            <Col sm={6} md={6} lg={6}>
-                                <Card className="h-100">
+                            <Col sm={12} md={6} className="d-flex">
+                                <Card className="flex-fill h-100 shadow-lg rounded-3">
                                     <Card.Img
                                         variant="top"
                                         src={bookSelect.img}
-                                        className="h-75 w-100 object-fit-cover"
+                                        className="rounded-top"
+                                        style={{
+                                            height: '400px',
+                                            objectFit: 'cover',
+                                            width: '100%',
+                                        }}
                                     />
                                     <Card.Body>
                                         <Card.Title>
                                             {bookSelect.title}
                                         </Card.Title>
                                         <Card.Text>
+                                            <strong>Category:</strong>{' '}
                                             {bookSelect.category}
                                         </Card.Text>
                                         <Card.Text>
+                                            <strong>Price:</strong>{' '}
                                             {bookSelect.price}£
                                         </Card.Text>
                                         <Card.Text>
@@ -72,27 +79,33 @@ const BookDetails = () => {
                                     </Card.Body>
                                 </Card>
                             </Col>
-
-                            <Col sm={6} md={6} lg={6}>
-                                <div>
-                                    <h1>Comments</h1>
-                                    <div className="mt-1">
+                            <Col sm={12} md={6}>
+                                <Card className="h-100 shadow-sm">
+                                    <Card.Body className="p-4">
+                                        <h3>Comments</h3>
                                         {comments.length > 0 ? (
                                             comments.map((comment) => (
-                                                <p key={comment._id}>
-                                                    {comment.comment} - Rating:{' '}
-                                                    {comment.rate}
-                                                </p>
+                                                <div
+                                                    key={comment._id}
+                                                    className="mb-3 border-bottom pb-2"
+                                                >
+                                                    <p className="mb-1">
+                                                        {comment.comment}
+                                                    </p>
+                                                    <small className="text-muted">
+                                                        Rating: {comment.rate}
+                                                    </small>
+                                                </div>
                                             ))
                                         ) : (
                                             <p>No comments available</p>
                                         )}
-                                    </div>
-                                </div>
+                                    </Card.Body>
+                                </Card>
                             </Col>
                         </>
                     ) : (
-                        <p>Nessun libro selezionato.</p>
+                        <p>No book selected.</p>
                     )}
                 </Row>
             </Container>
