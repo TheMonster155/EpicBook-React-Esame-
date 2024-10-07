@@ -10,7 +10,7 @@ import { DarkModeContext } from '../context/DarkModeContext'
 const BookCard = ({ price, category, title, img, asin }) => {
     const { selectAsin, toggleAsin } = useContext(SelectContext)
     const { isDark } = useContext(DarkModeContext)
-    const isSelected = selectAsin === asin // Controlla se il libro è selezionato
+    const isSelected = selectAsin === asin
     const navigate = useNavigate()
 
     const redirectDetails = () => {
@@ -18,7 +18,7 @@ const BookCard = ({ price, category, title, img, asin }) => {
     }
 
     const toggleIsSelect = () => {
-        toggleAsin(asin) // Cambia l'asin selezionato
+        toggleAsin(asin)
         Swal.fire({
             title: `${title}`,
             text: `Hai selezionato "${title}"`,
@@ -31,7 +31,7 @@ const BookCard = ({ price, category, title, img, asin }) => {
         <Col sm={12} md={6} lg={4} className="mb-4">
             <Card
                 className={`h-100 custom ${isDark ? 'border-3 white' : ''} shadow border-0 rounded-3 transition ${isSelected ? 'selected-border' : ''}`}
-                onClick={toggleIsSelect} // Click sulla Card per selezionare
+                onClick={toggleIsSelect}
             >
                 <Card.Img variant="top" className="card-image" src={img} />
                 <Card.Body

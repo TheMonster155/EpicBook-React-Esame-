@@ -9,7 +9,7 @@ const Footer = () => {
     return (
         <footer
             className={`text-center py-5 ${isDark ? 'bg-dark text-light' : 'bg-light text-dark'}`}
-            style={{ padding: '60px 0' }} // Aumenta il padding a tuo piacimento
+            style={{ padding: '60px 0' }}
         >
             <Container>
                 <Row>
@@ -54,17 +54,3 @@ const Footer = () => {
 }
 
 export default Footer
-
-/*
-  <div className="d-flex gap-3">
-                                {navLinks.map((link) => (
-                                    <a
-                                        className={`text-decoration-none ${isDark ? 'text-white' : 'text-dark'}`}
-                                        href={link.href}
-                                        key={link.href} // Assicurati di avere una chiave unica
-                                    >
-                                        {link.text}
-                                    </a>
-                                ))}
-                            </div>
-*/

@@ -123,7 +123,7 @@ const AllComments = ({ asin }) => {
             rate: comment.rate,
             comment: comment.comment,
             id: comment._id,
-            elementId: asin, // Assicurati di mantenere elementId durante la modifica
+            elementId: asin,
         })
     }
 

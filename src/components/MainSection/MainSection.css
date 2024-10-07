@@ -1,16 +1,16 @@
-/* MainSection.css */
+
 
 .container {
     display: flex;
 }
 
 .card {
-    margin-bottom: 20px; /* Distanza tra le card */
+    margin-bottom: 20px;
 }
 
 .comment-section {
-    background-color: #f8f9fa; /* Colore di sfondo per la sezione dei commenti */
-    padding: 20px; /* Padding per la sezione dei commenti */
-    border-left: 1px solid #ccc; /* Aggiungi un bordo per separare le colonne */
-    height: 100%; /* Assicurati che la sezione commenti riempia l'altezza */
+    background-color: #f8f9fa; 
+    padding: 20px; 
+    border-left: 1px solid #ccc; 
+    height: 100%; 
 }

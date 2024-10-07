@@ -20,7 +20,6 @@ const NavbarCustom = () => {
             expand="lg"
         >
             <Container>
-                {/* Brand e Dark Mode Toggle */}
                 <Navbar.Brand>
                     <Link
                         to="/"
@@ -30,7 +29,6 @@ const NavbarCustom = () => {
                     </Link>
                 </Navbar.Brand>
 
-                {/* Navbar Links */}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -45,7 +43,6 @@ const NavbarCustom = () => {
                         ))}
                     </Nav>
 
-                    {/* Form di ricerca */}
                     <Form className="d-inline-flex" onSubmit={handleSubmitForm}>
                         <Row>
                             <Col>
