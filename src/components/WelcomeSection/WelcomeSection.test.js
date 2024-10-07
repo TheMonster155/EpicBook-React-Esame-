@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import WelcomeSection from './WelcomeSection'
-import { DarkModeContextProvider } from '../context/DarkModeContext' // Assicurati di importare il contesto
+import { DarkModeContextProvider } from '../context/DarkModeContext'
 import { MemoryRouter } from 'react-router-dom'
 
-// Mock della funzione sweetAlert
 const mockSweetAlert = jest.fn()
 
 describe('Test WelcomeSection ', () => {
@@ -17,7 +16,6 @@ describe('Test WelcomeSection ', () => {
             </MemoryRouter>
         )
 
-        // Verifica che il titolo "Libro Del Giorno" venga renderizzato
         const titleElement = screen.getByText(/libro del giorno/i)
         expect(titleElement).toBeInTheDocument()
     })
@@ -31,11 +29,9 @@ describe('Test WelcomeSection ', () => {
             </MemoryRouter>
         )
 
-        // Verifica che il pulsante "Acquista" sia presente
         const purchaseButton = screen.getByText(/acquista/i)
         expect(purchaseButton).toBeInTheDocument()
 
-        // Verifica che il pulsante "Dettagli" sia presente
         const detailsButton = screen.getByText(/dettagli/i)
         expect(detailsButton).toBeInTheDocument()
     })

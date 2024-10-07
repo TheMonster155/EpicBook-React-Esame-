@@ -1,4 +1,3 @@
-/*
 import '@testing-library/jest-dom'
 const mockBooks = [
     {
@@ -28,50 +27,43 @@ const mockDarkModeContextValue = {
 const mockSetSelectAsin = jest.fn()
 
 describe('MainSection', () => {
-    test('dovrebbe non selezionare alcun libro', () => {
+    it('should not select a book  ', () => {
         const selectContextValue = {
             selectAsin: null,
             setSelectAsin: mockSetSelectAsin,
         }
 
-        // Verifica che selectAsin sia null
         expect(selectContextValue.selectAsin).toBeNull()
     })
 
-    test('dovrebbe chiamare setSelectAsin al clic su un libro', () => {
+    it('should call setSelectAsin when clicking on a book', () => {
         const selectContextValue = {
             selectAsin: null,
             setSelectAsin: mockSetSelectAsin,
         }
 
-        // Simula il clic e chiama setSelectAsin
         selectContextValue.setSelectAsin('123')
 
-        // Verifica che setSelectAsin sia stato chiamato con '123'
         expect(mockSetSelectAsin).toHaveBeenCalledWith('123')
     })
 
-    test('dovrebbe rendere null selectAsin inizialmente', () => {
+    it('should make null selectAsin initially', () => {
         const selectContextValue = {
             selectAsin: null,
             setSelectAsin: mockSetSelectAsin,
         }
 
-        // Controlla che selectAsin sia null
         expect(selectContextValue.selectAsin).toBeNull()
     })
 
-    test('dovrebbe caricare le recensioni al clic su un libro', () => {
+    it('should load reviews at the click of a book', () => {
         const selectContextValue = {
             selectAsin: null,
             setSelectAsin: mockSetSelectAsin,
         }
 
-        // Simula il clic su un libro e chiama setSelectAsin
         selectContextValue.setSelectAsin('123')
 
-        // Verifica che setSelectAsin sia stato chiamato correttamente
         expect(mockSetSelectAsin).toHaveBeenCalledWith('123')
     })
 })
-*/
